@@ -26,5 +26,8 @@
         <module name="seamtop-demo" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="seamtop-demo" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
