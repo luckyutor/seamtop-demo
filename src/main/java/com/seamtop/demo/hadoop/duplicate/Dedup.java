@@ -28,6 +28,7 @@ public class Dedup {
     public static class Reduce extends Reducer<Text,Text,Text,Text>{
         //实现Reduce函数
         public void reduce(Text key,Iterable<Text> values,Context context) throws IOException,InterruptedException{
+
             context.write(key,new Text(""));
         }
     }
