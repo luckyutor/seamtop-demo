@@ -38,7 +38,7 @@ public class Sort {
 
     public static void main(String [] args) throws Exception{
         Configuration conf = new Configuration();
-        String [] ioArgs = new String[]{"sort_in","sort_out"};
+        String [] ioArgs = new String[]{"/sort_in","/sort_out"};
         conf.set("mapreduce.jobtracker.address","192.168.126.130:9001");
         String [] otherArgs = new GenericOptionsParser(conf,ioArgs).getRemainingArgs();
         if(otherArgs.length != 2){
