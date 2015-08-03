@@ -11,11 +11,13 @@ kafka 安装步骤
 
    bin/zookeeper-server-start.sh  config/zookeeper.properties & (&表示在后台执行)
 
-   bin/kafka-server-start.sh  config/server.properties &
+   ./kafka-server-start.sh ../config/server.properties &
 
 3、创建topic
 
    bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+
+   ./kafka-topics.sh --create --zookeeper 192.168.45.52:2181/kafka --replication-factor 1 --partitions 1 --topic test
 
      查看topic命令:
 
