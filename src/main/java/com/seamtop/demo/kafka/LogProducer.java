@@ -60,9 +60,9 @@ public class LogProducer {
             producer = new LogProducer();
             int i=0;
             while(true){
-                producer.send("test", "this is a sample" + i);
+                producer.send("test", "hello world feng zong jun");
                 i++;
-                Thread.sleep(2000);
+                Thread.sleep(6000);
             }
         }catch(Exception e){
             e.printStackTrace();

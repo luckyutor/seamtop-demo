@@ -81,6 +81,7 @@ public class MyKafkaTopology {
             String word = input.getString(0);
             int count = input.getInteger(1);
             LOG.info("RECV[splitter -> counter] " + word + " : " + count);
+            System.out.println("RECV[splitter -> counter] " + word + " : " + count);
             AtomicInteger ai = this.counterMap.get(word);
             if(ai == null) {
                 ai = new AtomicInteger();
@@ -98,6 +99,7 @@ public class MyKafkaTopology {
             while(iter.hasNext()) {
                 Entry<String, AtomicInteger> entry = iter.next();
                 LOG.info(entry.getKey() + "\t:\t" + entry.getValue().get());
+
             }
 
         }
@@ -110,7 +112,7 @@ public class MyKafkaTopology {
 
     public static void main(String[] args) throws AlreadyAliveException, InvalidTopologyException, InterruptedException {
         String zks = "192.168.45.52:2181";
-        String topic = "my-replicated-topic5";
+        String topic = "test";
         String zkRoot = "/storm"; // default zookeeper root configuration for storm
         String id = "word";
 
