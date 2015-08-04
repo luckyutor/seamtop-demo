@@ -134,7 +134,7 @@ public class MyKafkaTopology {
         if (args != null && args.length > 0) {
             // Nimbus host name passed from command line
             conf.put(Config.NIMBUS_HOST, args[0]);
-            conf.setNumWorkers(3);
+            conf.setNumWorkers(1);
             StormSubmitter.submitTopologyWithProgressBar(name, conf, builder.createTopology());
         } else {
             conf.setMaxTaskParallelism(3);
