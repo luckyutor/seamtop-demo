@@ -24,20 +24,20 @@ public class WordCountTopology {
         builder.setSpout("word-reader", new WordReader());
         builder.setBolt("word-spilter", new WordSpliter()).shuffleGrouping("word-reader");
         builder.setBolt("word-counter", new WordCounter()).shuffleGrouping("word-spilter");
-        String inputPaht = "D://test/";
-        //String inputPaht = "/opt/seamtop/server/apache-storm-0.9.4/test";
+        //String inputPaht = "D://test/";
+        String inputPaht = "/opt/seamtop/server/apache-storm-0.9.4/test";
         String timeOffset = "2";
         Config conf = new Config();
         conf.put("INPUT_PATH", inputPaht);
         conf.put("TIME_OFFSET", timeOffset);
         conf.setDebug(true);
         //以下两行为本机环境测试
-        LocalCluster cluster = new LocalCluster();
-        cluster.submitTopology("WordCount", conf, builder.createTopology());
+//        LocalCluster cluster = new LocalCluster();
+//        cluster.submitTopology("WordCount", conf, builder.createTopology());
         //以下为集群环境测试
-//        conf.put(Config.NIMBUS_HOST, "192.168.45.52");
-//        conf.setNumWorkers(2);
-//        StormSubmitter.submitTopologyWithProgressBar("WordCount2", conf, builder.createTopology());
+        conf.put(Config.NIMBUS_HOST, "192.168.126.130");
+        conf.setNumWorkers(2);
+        StormSubmitter.submitTopologyWithProgressBar("WordCount2", conf, builder.createTopology());
     }
 }
 
