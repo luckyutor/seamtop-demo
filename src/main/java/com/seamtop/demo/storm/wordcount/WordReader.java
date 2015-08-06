@@ -31,8 +31,6 @@ public class WordReader extends BaseRichSpout {
 
     @Override
     public void nextTuple() {
-        System.out.println("------------execute next tuple --------");
-
         Collection<File> files = FileUtils.listFiles(new File(inputPath),
                 FileFilterUtils.notFileFilter(FileFilterUtils.suffixFileFilter(".bak")), null);
         for (File f : files) {
