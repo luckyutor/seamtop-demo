@@ -1,72 +1,43 @@
-
 package com.seamtop.demo.storm.wordcount;
+
+
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.StormSubmitter;
-import backtype.storm.task.ShellBolt;
-import backtype.storm.topology.BasicOutputCollector;
-import backtype.storm.topology.IRichBolt;
-import backtype.storm.topology.OutputFieldsDeclarer;
+import backtype.storm.generated.AlreadyAliveException;
+import backtype.storm.generated.InvalidTopologyException;
 import backtype.storm.topology.TopologyBuilder;
-import backtype.storm.topology.base.BaseBasicBolt;
-import backtype.storm.tuple.Fields;
-import backtype.storm.tuple.Tuple;
-import backtype.storm.tuple.Values;
-import java.util.HashMap;
-import java.util.Map;
-/**
- * This topology demonstrates Storm's stream groupings and multilang capabilities.
- */
-public class WordCountTopology {
-    public static class SplitSentence extends ShellBolt implements IRichBolt {
-        public SplitSentence() {
-            super("python", "splitsentence.py");
-        }
-        @Override
-        public void declareOutputFields(OutputFieldsDeclarer declarer) {
-            declarer.declare(new Fields("word"));
-        }
-        @Override
-        public Map<String, Object> getComponentConfiguration() {
-            return null;
-        }
-    }
-    public static class WordCount extends BaseBasicBolt {
-        Map<String, Integer> counts = new HashMap<String, Integer>();
 
-        @Override
-        public void execute(Tuple tuple, BasicOutputCollector collector) {
-            String word = tuple.getString(0);
-            Integer count = counts.get(word);
-            if (count == null)
-                count = 0;
-            count++;
-            counts.put(word, count);
-            collector.emit(new Values(word, count));
-        }
-        @Override
-        public void declareOutputFields(OutputFieldsDeclarer declarer) {
-            declarer.declare(new Fields("word", "count"));
-        }
-    }
-    public static void main(String[] args) throws Exception {
+public class WordCountTopology {
+    public static void main(String[] args) throws AlreadyAliveException, InvalidTopologyException, InterruptedException{
+//        if(args != null){
+//            for(int i=0;i<args.length;i++){
+//                System.out.println(args[i]);
+//            }
+//        }
+//        if (args.length != 2) {
+//            System.err.println("Usage: inputPaht timeOffset");
+//                    System.err.println("such as : java -jar WordCount.jar D://test/ 2");
+//                            System.exit(2);
+//        }
         TopologyBuilder builder = new TopologyBuilder();
-        builder.setSpout("spout", new RandomSentenceSpout(), 5);
-        builder.setBolt("split", new SplitSentence(), 8).shuffleGrouping("spout");
-        builder.setBolt("count", new WordCount(), 12).fieldsGrouping("split", new Fields("word"));
+        builder.setSpout("word-reader", new WordReader());
+        builder.setBolt("word-spilter", new WordSpliter()).shuffleGrouping("word-reader");
+        builder.setBolt("word-counter", new WordCounter()).shuffleGrouping("word-spilter");
+        String inputPaht = "D://test/";
+        //String inputPaht = "/opt/seamtop/server/apache-storm-0.9.4/test";
+        String timeOffset = "2";
         Config conf = new Config();
+        conf.put("INPUT_PATH", inputPaht);
+        conf.put("TIME_OFFSET", timeOffset);
         conf.setDebug(true);
-        if (args != null && args.length > 0) {
-            conf.setNumWorkers(3);
-            StormSubmitter.submitTopology("word-count", conf, builder.createTopology());
-            StormSubmitter.submitTopologyWithProgressBar("word-count", conf, builder.createTopology());
-        }
-        else {
-            conf.setMaxTaskParallelism(3);
-            LocalCluster cluster = new LocalCluster();
-            cluster.submitTopology("word-count", conf, builder.createTopology());
-            Thread.sleep(10000);
-            cluster.shutdown();
-        }
+        //以下两行为本机环境测试
+        LocalCluster cluster = new LocalCluster();
+        cluster.submitTopology("WordCount", conf, builder.createTopology());
+        //以下为集群环境测试
+//        conf.put(Config.NIMBUS_HOST, "192.168.45.52");
+//        conf.setNumWorkers(2);
+//        StormSubmitter.submitTopologyWithProgressBar("WordCount2", conf, builder.createTopology());
     }
 }
+
