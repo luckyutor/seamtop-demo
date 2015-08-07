@@ -18,7 +18,7 @@ kafka 安装步骤
    bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
 
    ./kafka-topics.sh --create --zookeeper 192.168.45.52:2181/kafka --replication-factor 1 --partitions 1 --topic test
-
+   ./kafka-topics.sh --list --zookeeper localhost
     如果出现Nonode错误，去掉/kafka
 
      查看topic命令:
