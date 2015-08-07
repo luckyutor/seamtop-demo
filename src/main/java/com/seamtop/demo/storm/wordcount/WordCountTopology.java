@@ -35,7 +35,7 @@ public class WordCountTopology {
 //        LocalCluster cluster = new LocalCluster();
 //        cluster.submitTopology("WordCount", conf, builder.createTopology());
         //以下为集群环境测试
-        conf.put(Config.NIMBUS_HOST, "192.168.126.130");
+        conf.put(Config.NIMBUS_HOST, "192.168.45.52");
         conf.setNumWorkers(2);
         StormSubmitter.submitTopologyWithProgressBar("WordCount2", conf, builder.createTopology());
     }
