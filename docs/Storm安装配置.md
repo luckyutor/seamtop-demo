@@ -17,15 +17,18 @@ sudo make install
 3、Python安装 2.6.6版本
 4、Storm配置：
 
+#####注意#####
+在配置Storm.yaml时，配置文件冒号两边要有空格，另外 - 6700  前面不能用tab。否则会出现错误
 
-storm.zookeeper.servers:
+
+storm.zookeeper.servers :
   - "111.222.333.444"
   - "555.666.777.888"
 
 storm.local.dir: "/home/admin/storm/workdir"
 nimbus.host: "111.222.333.444"
 
-supervisor.slots.ports:
+supervisor.slots.ports :
     - 6700
     - 6701
     - 6702
