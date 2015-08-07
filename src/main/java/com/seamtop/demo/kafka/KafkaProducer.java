@@ -27,7 +27,7 @@ public class KafkaProducer extends Thread
         int messageNo = 1;
         while (true)
         {
-            String messageStr = new String("Message_" + messageNo);
+            String messageStr = new String("feng zong jun ni are the world,ha ha ha");
             System.out.println("Send:" + messageStr);
             System.out.println("topic :"+topic);
             producer.send(new KeyedMessage<Integer, String>(topic, messageStr));

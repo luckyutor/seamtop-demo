@@ -89,7 +89,7 @@ public class MyKafkaTopology {
             }
             ai.addAndGet(count);
             collector.ack(input);
-            LOG.info("CHECK statistics map: " + this.counterMap);
+            //LOG.info("CHECK statistics map: " + this.counterMap);
         }
 
         @Override
@@ -112,7 +112,7 @@ public class MyKafkaTopology {
 
     public static void main(String[] args) throws AlreadyAliveException, InvalidTopologyException, InterruptedException {
         String zks = "192.168.45.52:2181";
-        String topic = "test";
+        String topic = "test2";
         String zkRoot = "/storm"; // default zookeeper root configuration for storm
         String id = "word";
 
@@ -134,7 +134,7 @@ public class MyKafkaTopology {
         if (args != null && args.length > 0) {
             // Nimbus host name passed from command line
             conf.put(Config.NIMBUS_HOST, args[0]);
-            conf.setNumWorkers(1);
+            conf.setNumWorkers(2);
             StormSubmitter.submitTopologyWithProgressBar(name, conf, builder.createTopology());
         } else {
             conf.setMaxTaskParallelism(3);
