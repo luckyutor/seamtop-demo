@@ -7,7 +7,7 @@ public class TestMain
     {
         KafkaProducer producerThread = new KafkaProducer(KafkaProperties.topic);
         producerThread.start();
-        KafkaConsumer consumerThread = new KafkaConsumer(KafkaProperties.topic);
-        consumerThread.start();
+//        KafkaConsumer consumerThread = new KafkaConsumer(KafkaProperties.topic);
+//        consumerThread.start();
     }
 }
