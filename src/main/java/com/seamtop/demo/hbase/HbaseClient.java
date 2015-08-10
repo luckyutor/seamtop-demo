@@ -53,7 +53,7 @@ public class HbaseClient {
         List<Put> list = new ArrayList<Put>();
         for(String r :rows){
             Put p = new Put(Bytes.toBytes(r));
-            p.add(Bytes.toBytes("family1"),Bytes.toBytes("column1"),Bytes.toBytes("fff"));
+            p.add(Bytes.toBytes("family1"),Bytes.toBytes("column1"),Bytes.toBytes("fff2"));
             list.add(p);
         }
         table.put(list);
@@ -61,8 +61,9 @@ public class HbaseClient {
     }
 
     public static void main(String [] args) throws Exception{
-        String[] str = new String[]{"family1","family2","family3"};
+        //String[] str = new String[]{"family1","family2","family3"};
         //createTable("test-table",str);
-
+        String [] rows = new String[]{"row-1","row-2"};
+        insertList("test-table",rows);
     }
 }
