@@ -11,6 +11,5 @@ public class ConcreteDecoratorA extends  Decorator{
 
     public void operation(){
         super.operation();
-        System.out.println("装饰A操作！");
     }
 }

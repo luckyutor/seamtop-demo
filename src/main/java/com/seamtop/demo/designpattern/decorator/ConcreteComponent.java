@@ -6,6 +6,6 @@ package com.seamtop.demo.designpattern.decorator;
 public class ConcreteComponent implements Component {
 
     public void operation(){
-        System.out.println("具体对象操作！");
+
     }
 }
