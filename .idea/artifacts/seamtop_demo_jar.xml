@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="seamtop-demo:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/seamtop_demo_jar</output-path>
+    <root id="archive" name="seamtop-demo.jar">
+      <element id="module-output" name="seamtop-demo" />
+    </root>
+  </artifact>
+</component>
