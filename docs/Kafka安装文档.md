@@ -18,7 +18,7 @@ kafka 安装步骤
    bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
 
    ./kafka-topics.sh --create --zookeeper 192.168.45.52:2181/kafka --replication-factor 1 --partitions 1 --topic test
-
+   ./kafka-topics.sh --list --zookeeper localhost
     如果出现Nonode错误，去掉/kafka
 
      查看topic命令:
@@ -32,7 +32,8 @@ kafka 安装步骤
                    This is a message
 
                    This is another message
-
+./kafka-console-producer.sh --broker-list 192.168.126.130:9092 --topic test
+./kafka-console-consumer.sh --zookeeper 192.168.126.130:2181 --topic test --from-beginning
 5、启动consumer
 
    bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning

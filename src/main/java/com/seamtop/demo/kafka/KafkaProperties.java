@@ -2,10 +2,10 @@ package com.seamtop.demo.kafka;
 
 public interface KafkaProperties
 {
-    final static String zkConnect = "192.168.45.52:2181";
+    final static String zkConnect = "192.168.126.130:2181";
     final static String groupId = "group1";
-    final static String topic = "test2";
-    final static String kafkaServerURL = "192.168.45.52";
+    final static String topic = "test";
+    final static String kafkaServerURL = "192.168.126.130";
     final static int kafkaServerPort = 9092;
     final static int kafkaProducerBufferSize = 64 * 1024;
     final static int connectionTimeOut = 20000;
